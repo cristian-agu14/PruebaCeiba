@@ -22,7 +22,7 @@ public class Vendedor {
 
     }
 
-    public boolean tieneGarantia(String codigo, String nombre) {
+    public boolean tieneGarantia(String codigo) {
     	
         return false;
     }

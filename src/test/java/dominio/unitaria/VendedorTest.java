@@ -8,9 +8,11 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 
 import dominio.Vendedor;
+import dominio.GarantiaExtendida;
 import dominio.Producto;
 import dominio.repositorio.RepositorioProducto;
 import dominio.repositorio.RepositorioGarantiaExtendida;
+import testdatabuilder.GarantiaExtendidaTestDataBuilder;
 import testdatabuilder.ProductoTestDataBuilder;
 
 public class VendedorTest {
@@ -22,6 +24,10 @@ public class VendedorTest {
 		ProductoTestDataBuilder productoTestDataBuilder = new ProductoTestDataBuilder();
 		
 		Producto producto = productoTestDataBuilder.build(); 
+		
+		GarantiaExtendidaTestDataBuilder garantiaExtendidaTestDataBuilder = new GarantiaExtendidaTestDataBuilder();
+		
+		GarantiaExtendida garantiaExtendida = garantiaExtendidaTestDataBuilder.buildGarantia(producto);
 		
 		RepositorioGarantiaExtendida repositorioGarantia = mock(RepositorioGarantiaExtendida.class);
 		RepositorioProducto repositorioProducto = mock(RepositorioProducto.class);
