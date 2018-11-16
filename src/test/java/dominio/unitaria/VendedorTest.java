@@ -26,7 +26,6 @@ public class VendedorTest {
 		Producto producto = productoTestDataBuilder.build(); 
 		
 		GarantiaExtendidaTestDataBuilder garantiaExtendidaTestDataBuilder = new GarantiaExtendidaTestDataBuilder();
-		
 		GarantiaExtendida garantiaExtendida = garantiaExtendidaTestDataBuilder.buildGarantia(producto);
 		
 		RepositorioGarantiaExtendida repositorioGarantia = mock(RepositorioGarantiaExtendida.class);

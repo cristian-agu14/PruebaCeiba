@@ -16,5 +16,8 @@ public interface RepositorioProducto {
 	 * @param producto
 	 */
 	void agregar(Producto producto);
+	
+	
+
 
 }

@@ -39,8 +39,7 @@ public class RepositorioProductoPersistente implements RepositorioProducto, Repo
 	@Override
 	public void agregar(Producto producto) {
 		entityManager.persist(ProductoBuilder.convertirAEntity(producto));
-	}	
-
+	}
 	
 
 }

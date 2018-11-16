@@ -1,6 +1,10 @@
 package dominio.repositorio;
 
 import dominio.Producto;
+
+import javax.persistence.NamedQuery;
+import javax.persistence.QueryHint;
+
 import dominio.GarantiaExtendida;
 
 public interface RepositorioGarantiaExtendida {
@@ -23,5 +27,11 @@ public interface RepositorioGarantiaExtendida {
 	 * @param codigo
 	 */
 	GarantiaExtendida obtener(String codigo);
+	
+	/**
+	 * Permite traer los productos por el nombre del cliente y el codigo del producto
+	 * @return
+	 */	
+	Producto obtenerPorProductoAndNombreCliente(Producto producto, String nombreCliente);
 
 }

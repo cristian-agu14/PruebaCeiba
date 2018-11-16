@@ -1,15 +1,11 @@
 package testdatabuilder;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import dominio.GarantiaExtendida;
 import dominio.Producto;
-import jdk.internal.util.xml.impl.Input;
 
 public class GarantiaExtendidaTestDataBuilder {
 

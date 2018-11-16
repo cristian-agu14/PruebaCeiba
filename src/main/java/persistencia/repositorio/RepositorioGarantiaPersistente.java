@@ -14,8 +14,12 @@ import persistencia.repositorio.jpa.RepositorioProductoJPA;
 
 public class RepositorioGarantiaPersistente implements RepositorioGarantiaExtendida {
 
+	// RepositorioProductoPersistente repositorioProductoPersistente;
+
 	private static final String CODIGO = "codigo";
+	private static final String NOMBRE_CLIENTE = "nombreCliente";
 	private static final String GARANTIA_EXTENDIDA_FIND_BY_CODIGO = "GarantiaExtendida.findByCodigo";
+	private static final String GARANTIA_EXTENDIDA_FIND_BY_PRODUCTO_AND_NOMBRE_CLIENTE = "GarantiaExtendida.findByProductoAndNombreCliente";
 
 	private EntityManager entityManager;
 
@@ -30,16 +34,16 @@ public class RepositorioGarantiaPersistente implements RepositorioGarantiaExtend
 	public void agregar(GarantiaExtendida garantia) {
 		GarantiaExtendidaEntity garantiaEntity = buildGarantiaExtendidaEntity(garantia);
 		entityManager.persist(garantiaEntity);
-		
+
 	}
-	
+
 	@Override
 	public Producto obtenerProductoConGarantiaPorCodigo(String codigo) {
-		
+
 		GarantiaExtendidaEntity garantiaEntity = obtenerGarantiaEntityPorCodigo(codigo);
 		return ProductoBuilder.convertirADominio(garantiaEntity != null ? garantiaEntity.getProducto() : null);
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	private GarantiaExtendidaEntity obtenerGarantiaEntityPorCodigo(String codigo) {
 
@@ -53,7 +57,8 @@ public class RepositorioGarantiaPersistente implements RepositorioGarantiaExtend
 
 	private GarantiaExtendidaEntity buildGarantiaExtendidaEntity(GarantiaExtendida garantia) {
 
-		ProductoEntity productoEntity = repositorioProductoJPA.obtenerProductoEntityPorCodigo(garantia.getProducto().getCodigo());
+		ProductoEntity productoEntity = repositorioProductoJPA
+				.obtenerProductoEntityPorCodigo(garantia.getProducto().getCodigo());
 
 		GarantiaExtendidaEntity garantiaEntity = new GarantiaExtendidaEntity();
 		garantiaEntity.setProducto(productoEntity);
@@ -62,18 +67,24 @@ public class RepositorioGarantiaPersistente implements RepositorioGarantiaExtend
 		return garantiaEntity;
 	}
 
-	
 	@Override
 	public GarantiaExtendida obtener(String codigo) {
-		
+
 		GarantiaExtendidaEntity garantiaEntity = obtenerGarantiaEntityPorCodigo(codigo);
 
 		return new GarantiaExtendida(ProductoBuilder.convertirADominio(garantiaEntity.getProducto()),
-				garantiaEntity.getFechaSolicitudGarantia(),garantiaEntity.getFechaFinGarantia(),garantiaEntity.getPrecio(),
-				garantiaEntity.getNombreCliente()
-				);
+				garantiaEntity.getFechaSolicitudGarantia(), garantiaEntity.getFechaFinGarantia(),
+				garantiaEntity.getPrecio(), garantiaEntity.getNombreCliente());
 	}
 
-	
-	
+	@Override
+	public Producto obtenerPorProductoAndNombreCliente(Producto producto, String nombreCliente) {
+
+		Query query = entityManager.createNamedQuery(GARANTIA_EXTENDIDA_FIND_BY_PRODUCTO_AND_NOMBRE_CLIENTE);
+		query.setParameter(CODIGO, producto.getCodigo());
+		query.setParameter(NOMBRE_CLIENTE, nombreCliente);
+
+		return producto;
+	}
+
 }
