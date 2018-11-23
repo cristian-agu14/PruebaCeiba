@@ -21,7 +21,7 @@ public class Vendedor {
 
 	}
 
-	public void generarGarantia(String codigo) {
+	public void generarGarantia(String codigo, String nombreCliente) {
 
 		throw new UnsupportedOperationException("Método pendiente por implementar");
 
