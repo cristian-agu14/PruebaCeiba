@@ -11,10 +11,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import dominio.Producto;
+
 @Entity(name = "GarantiaExtendida")
 @NamedQueries({
 		@NamedQuery(name = "GarantiaExtendida.findByCodigo", query = "SELECT garantia from GarantiaExtendida garantia where garantia.producto.codigo = :codigo"),
-		@NamedQuery(name = "GarantiaExtendida.findByProductoAndNombreCliente", query = "SELECT garantia from GarantiaExtendida where garantia.producto.codigo = :codigo AND grantia.nombreCliente =: nombreCliente") })
+		@NamedQuery(name = "GarantiaExtendida.findByProductoAndNombreCliente", query = "SELECT garantia from GarantiaExtendida where garantia.producto.codigo = :codigo AND grantia.nombreCliente =: nombreCliente"), 
+		@NamedQuery(name = "GarantiaExtendida.findByProducto", query = "SELECT garantia from GarantiaExtendida where garantia.producto2 =: producto")})
 public class GarantiaExtendidaEntity {
 
 	@Id

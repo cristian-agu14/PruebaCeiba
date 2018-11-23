@@ -20,6 +20,8 @@ public class RepositorioGarantiaPersistente implements RepositorioGarantiaExtend
 	private static final String NOMBRE_CLIENTE = "nombreCliente";
 	private static final String GARANTIA_EXTENDIDA_FIND_BY_CODIGO = "GarantiaExtendida.findByCodigo";
 	private static final String GARANTIA_EXTENDIDA_FIND_BY_PRODUCTO_AND_NOMBRE_CLIENTE = "GarantiaExtendida.findByProductoAndNombreCliente";
+	private static final String GARANTIA_EXTENDIDA_FIND_BY_PRODUCTO ="GarantiaExtendida.findByProducto";
+	private static final String PRODUCTO = "producto";
 
 	private EntityManager entityManager;
 
@@ -78,13 +80,29 @@ public class RepositorioGarantiaPersistente implements RepositorioGarantiaExtend
 	}
 
 	@Override
-	public Producto obtenerPorProductoAndNombreCliente(Producto producto, String nombreCliente) {
-
+	public GarantiaExtendida obtenerPorProductoAndNombreCliente(Producto producto, String nombreCliente) {
+		
 		Query query = entityManager.createNamedQuery(GARANTIA_EXTENDIDA_FIND_BY_PRODUCTO_AND_NOMBRE_CLIENTE);
 		query.setParameter(CODIGO, producto.getCodigo());
 		query.setParameter(NOMBRE_CLIENTE, nombreCliente);
 
-		return producto;
+		return (GarantiaExtendida) query.getSingleResult();
+	}
+
+	@Override
+	public GarantiaExtendida ObtenerPorProducto(String codigo) {
+		
+		Producto producto = null;
+		
+		Query query = entityManager.createNamedQuery(GARANTIA_EXTENDIDA_FIND_BY_CODIGO);
+		query.setParameter(codigo, codigo);
+		
+		producto = (Producto) query.getSingleResult();
+		
+		Query queryGarantia = entityManager.createNamedQuery(GARANTIA_EXTENDIDA_FIND_BY_PRODUCTO);
+		queryGarantia.setParameter(PRODUCTO, producto);
+		
+		return (GarantiaExtendida) queryGarantia.getSingleResult();
 	}
 
 }

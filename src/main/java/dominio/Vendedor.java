@@ -1,6 +1,7 @@
 package dominio;
 
 import dominio.repositorio.RepositorioProducto;
+import persistencia.repositorio.RepositorioGarantiaPersistente;
 
 import java.util.regex.Pattern;
 
@@ -22,8 +23,12 @@ public class Vendedor {
 	}
 
 	public void generarGarantia(String codigo, String nombreCliente) {
-
+		
+		
+		
 		throw new UnsupportedOperationException("Método pendiente por implementar");
+		
+		
 
 	}
 
